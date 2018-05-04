@@ -1,6 +1,6 @@
 {
   "name": "flowplayer",
-  "version": "7.0.0",
+  "version": "7.2.6",
   "description": "The HTML5 video player for the web",
   "main": "dist/flowplayer.js",
   "directories": {
@@ -9,7 +9,7 @@
   "scripts": {
     "test": "mochify ./test/unit/*.js",
     "test-watch": "mochify -w ./test/unit/*.js",
-    "fixmeprepublish": "make clean && make skins && make min && make flash && make",
+    "fixmeprepublish": "make clean && make skin && make min && make flash && make",
     "testBundle": "browserify -o dist/test-bundle.js test/main.js"
   },
   "repository": {
@@ -45,7 +45,7 @@
     "postcss-cli": "^2.6.0",
     "postcss-unopacity": "^1.0.1",
     "scriptjs": "^2.5.7",
-    "uglify-js": "~2.4.3"
+    "uglify-js": "^3.3.7"
   },
   "dependencies": {}
 }

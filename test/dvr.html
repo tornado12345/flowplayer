@@ -17,12 +17,6 @@
 
    <!-- include flowplayer -->
    <script src="../dist/flowplayer.js?i"></script>
-   <script>
-//flowplayer.conf.hlsQualities = [{level: -1, label: 'ABR' }, { level: 0, label: 'Low quality' }, { level: 7, label: 'High quality' }];
-//flowplayer.conf.hlsQualities = false;
-//flowplayer.conf.hlsQualities = 'drive';
-//flowplayer.conf.hlsQualities = [-1,0,7];
-   </script>
 
 </head>
 
@@ -30,18 +24,24 @@
 
    <!-- the player -->
    <div class="flowplayer"
-      -data-engine="flash"
       data-swf="../dist/flowplayer.swf"
       data-swf-hls="../dist/flowplayerhls.swf"
-      data-rtmp="rtmp://s3b78u0kbtx79q.cloudfront.net/cfx/st"
-      -data-splash="//drive.cdn.flowplayer.org/202777/84049-snap.jpg"
-      data-hls-qualities="[-1,0,1]"
-      data-ratio=".4167">
+      data-dvr="true"
+      data-aspect-ratio="40:23">
 
-     <video -autoplay -preload="none" -data-title="Foo bar">
-        <source type="video/mp4" src="//edge.flowplayer.org/bauhaus.mp4">
+     <video>
+        <source type="application/x-mpegurl" src="http://stream.novascotiawebcams.com/live-origin/whitepointbeach/playlist.m3u8?DVR">
+        <source type="application/x-mpegurl" src="//wowza.jwplayer.com/live/jelly.stream/playlist.m3u8?DVR">
       </video>
 
    </div>
+
+   <script>
+   $(function() {
+   flowplayer().on('dvrwindow', function(ev, api, d) {
+     console.log('dvrwindow', d);
+   });
+   });
+   </script>
 </body>
 

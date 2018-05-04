@@ -2,7 +2,7 @@
  Flowplayer : The Video Player for Web
 
  Copyright (c) 2014 Flowplayer Ltd
- http://flowplayer.org
+ https://flowplayer.com
 
  Authors: Guillaume du Pontavice
 
@@ -10,14 +10,14 @@
 
  This GPL version includes Flowplayer branding
 
- http://flowplayer.org/GPL-license/#term-7
+ https://flowplayer.com/license/#additional-term-per-gpl-section-7
 
  Commercial versions are available
  * part of the upgrade cycle
  * support the player development
  * no Flowplayer trademark
 
- http://flowplayer.org/pricing/
+ https://flowplayer.com/pricing/
  */
 package {
     import flash.events.*;
@@ -268,11 +268,15 @@ public class NetStreamProvider implements StreamProvider {
 
         private function setupStream(conn : NetConnection) : void {
             player.debug("setupStream() ", {ready:ready, preloadCompete:preloadComplete, paused:paused, autoplay:conf.autoplay});
-
+            var stopTracker : Timer;
             netStream = new NetStream(conn);
             var bufferTime : Number = conf.hasOwnProperty("bufferTime") ? conf.bufferTime : conf.live ? 0 : 3;
             player.debug("bufferTime == " + bufferTime);
             netStream.bufferTime = bufferTime;
+            if (conf.hasOwnProperty("bufferTimeMax")) {
+                player.debug("bufferTimeMax == " + conf.bufferTimeMax);
+                netStream.bufferTimeMax = conf.bufferTimeMax;
+            }
             video.attachNetStream(netStream);
             volume(volumeLevel || Number(conf.initialVolume), false);
 
@@ -333,6 +337,9 @@ public class NetStreamProvider implements StreamProvider {
                 if (conf.debug) player.fire("NetStatusEvent: ", e.info.code);
 
                 switch (e.info.code) {
+                    case "NetStream.Video.DimensionChange":
+                        player.resize();
+                        break;
                     case "NetStream.Play.Start":
                         finished = false;
                         // RTMP fires start a lot
@@ -340,6 +347,10 @@ public class NetStreamProvider implements StreamProvider {
                             if (conf.autoplay) {
                                 paused = false;
                             }
+                        }
+                        // Stop the stop timer if it's running
+                        if (stopTracker && stopTracker.running) {
+                            stopTracker.stop();
                         }
                         break;
                     case "NetStream.Seek.Notify":
@@ -358,7 +369,7 @@ public class NetStreamProvider implements StreamProvider {
                         player.fire(Flowplayer.ERROR, {code:4});
                         break;
                     case "NetStream.Play.Stop":
-                        var stopTracker : Timer = new Timer(100);
+                        stopTracker = new Timer(100);
                         var prevTime : Number = 0;
                         if (stopTracker && stopTracker.running) return;
                         stopTracker.addEventListener(TimerEvent.TIMER, function(e : TimerEvent) : void {

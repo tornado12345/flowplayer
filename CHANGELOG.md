@@ -1,3 +1,251 @@
+Version 7.2.6
+=============
+
+Fixes
+-----
+
+ * Fix #1373 - Autoplay broken on (some) mobile devices
+ * Fix #1361 - Impossible to mute player on iOS on autoplay
+
+Version 7.2.5
+=============
+
+Enhancements
+------------
+
+ * Make "Unmute by click" configurable (#1327)
+ * Listen to HLS.js errors internally (#1331)
+ * add recoverMediaError and recoverNetworkError config options (#1345)
+
+Fixes
+-----
+
+ * Fix #1351 - Player resumes on seek after finish on IE11
+ * Fix #1336 - 7.2.4 does not obey volume:
+ * Fix #1343 - autoplay: does not work with hlsjs-lite engine with video-tag-based setups
+ * Fix #1300 - cuepoints at end of video fire 'cuepoint' events inconsistently
+ * Fix #1348 - Cuepoints marker are not removed when deleting cuepoint
+ * Fix #1335 - Re-loading the same clip fails
+ * Fix #1329 - Autoplay + poster - poster can be sticky
+ * Fix #1337 - Flowplayer swallows all keys when focused.
+ * Fix #1338 - jQuery plugin tries to parse flowplayer-generated containers
+ * Fix #1333 - New engine extension API could be more future-proof
+ * Fix #1334 - `.fp-player` element should be removed on `shutdown`
+ * Fix #1332 - `video.src` should be always the full url instead of blob url
+
+
+Version 7.2.4
+=============
+
+Fixes
+-----
+
+ * Fix #1330 - Autoplay broken on iPhone (regression)
+
+
+Version 7.2.3
+=============
+
+Fixes
+-----
+
+ * Fix #1324 - v7.2.2: keyboard shortcuts work only in last instance (regression)
+ * Fix #1328 - Autoplay + live setups broken with internal HLS engine
+ * Fix #1325 - desktop Safari: still type error with empty cache
+
+
+Version 7.2.2
+=============
+
+Enhancements
+------------
+
+ * Global configuration option to disable localStorage (#1317)
+ * Custom arrow keys seeking time (#1313)
+ * Add option to disable muted autoplay fallback (#1283)
+
+Fixes
+-----
+
+ * Fix #1314 - keyboard shortcuts should always work when Flowplayer has focus
+ * Fix #1206 - RTL embed menu is head over heels, and on wrong side
+ * Fix #1280 - Live + JS-setup broken on iPhone 10.x
+ * Fix #1172 - default playlist on mobiles (touch?): prev/next sticky visibility after touch
+ * Fix #1278 - Getting an error in the console related to buffer
+ * Fix #1202 - IE8: Flash __quality broken with VOD/RTMP
+ * Fix #1319 - Fullscreen doesn't work on Safari 9.1 and lower
+ * Fix #1264 - volume(level, true) changes localStorage.volume when called from within event
+ * Fix #1304 - iOS + splash - player starts muted
+ * Fix #1288 - Manual seeking in control bar stopped workin until all video is loaded (7.2.1. Safari)
+ * Fix #1232 - Excessive network request upon page unload in IE 11
+ * Fix #1318 - Wrong duration on wowza streams
+ * Fix #1293 - Orientation change leads to error: ‘The index is not in the allowed range’
+ * Fix #1309 - Video is restarting on scroll iOS
+ * Fix #1282 - remove `support.mutedAutoplay`
+ * Fix #1307 - Autoplay mute-fallback persists muted state
+ * Fix #1290 - flowplayer is stalled if autoplay is completely disabled
+ * Fix #1299 - Some ui options are not accessible in live stream mode.
+ * Fix #1239 - bug in share extension when there is non ascii characters in configs
+ * Fix #1279 - Safari does not show first frame
+ * Fix #1323 - Splash setups need two clicks in flash engine
+
+Version 7.2.1
+=============
+
+Fixes
+-----
+
+ * Fix #1276 - Buffer handling is not backwards compatible
+ * Fix #1275 - Playlist does not advance by default
+ * Fix #1274 - Safari autoplay stalls
+
+Version 7.2
+===========
+
+Enhancements
+------------
+
+ * Rewritten HTML5 engine to gracefully handle browser behavior changes regarding autoplay
+ * Videos are no longer preloaded until video player enters viewport
+ * Experimental built-in HLS.js engine. Can be enabled by including the HLS.js library on your site
+
+Fixes
+-----
+
+ * Fix #1262 - mutedAutoplay iOS: does not work with poster setups
+ * Fix #1238 - Fix bug for non-ASCII characters in config
+ * Fix #1237 - subtitles: more lenient timecode regex for first field
+ * Fix #1260 - Safari 11 does not autoplay videos with sound or HLS
+ * Fix #1258 - mutedAutoplay: still more fine-grained client detection required
+ * Fix #1203 - Safari 10.1+ fullscreen mode not completed
+ * Fix #1198 - seek to 0 reports undefined target pos in 3rd seek event callback argument
+ * Fix #1191 - Fullscreen button doesn't do anything on Safari / Mac
+ * Fix #1164 - Safari, Chrome video tag based: videos downloaded before document ready
+ * Fix #1272 - conf.advance cannot be configured dynamically
+
+Version 7.1.2
+=============
+
+Fixes
+-----
+
+ * Fix #1252 - Android < 5 Samsung browser: splash broken since 7.1
+ * Fix #1256 - Responsive controlbar scaling does not react to fullscreen
+ * Fix #1249 - Samsung Internet browser: cannot handle firstframe and mutedAutoplay
+ * Fix #1248 - Android Chrome firstframe: errors become fatal with engine plugins
+
+Version 7.1.1
+=============
+
+Fixes
+-----
+
+ * Fix #1244 - Android 4.3 does not support mutedAutoplay
+ * Fix #1242 - iOS < 10: player unusable with autoplay etc.
+ * Fix #1241 - splash mobile throws TypeError on start
+
+Version 7.1
+===========
+
+Enhancements
+------------
+
+ * Removed forced splash setup from mobile devices (#1162, #1227)
+ * Muted autoplay on mobile devices (#1162, #1227)
+ * Subtitle menu for native subtitles (#1209)
+ * Responsive font sizes (#1176, #1143)
+ * Fullscreen: hide cursor on mouseout (#1223)
+
+Fixes
+-----
+
+ * Fix #1233 - displayed subtitles not removed on seek to position w/o subtitles
+ * Fix #1236 - Fix problem when video resolution changed. Handle the NetStream.Video.DimensionChange event
+ * Fix #1228 - Safari native HLS over https: video width and height are 0
+ * Fix #1231 - Attempt to seek to undefined time
+ * Fix #1189 - native hls live: seeking state on stop
+ * Fix #1178 - API Object not available on "fullscreen" event.
+ * Fix #1221 - Error message doesn't show up on Chrome 59
+ * Fix #1137 - dvr: consistent timestamp across engines
+ * Fix #1184 - native_fullscreen prevents subtitles from showing (regression from 7.0.2)
+ * Fix #1194 - nativesubtitles do not work
+ * Fix #1196 - iPad mute button doesn't work
+ * Fix #1218 - fp-waiting loading animation only visible on hover
+ * Fix #1226 - ffmpeg restart problem. The toolbar remains visible after ffmpeg restarts
+ * Fix #1215 - common.createElement: Win7 IE compatibility
+
+Version 7.0.4
+=============
+
+ * Fix #1183 - Subtitle menu does not hide after select
+ * Fix #1182 - Captions control is duplicated when changing VOD quality
+ * Fix #1180 - Firefox does not show first subtitle with splash setups
+ * Fix #1181 - menus usable only once (regression from 7.0.2)
+
+Version 7.0.3
+=============
+
+Enhancements
+------------
+
+ * Add config option to disable Chromecast (#1141)
+ * Option to disable inline playback on iPhones (#1145)
+
+Fixes
+-----
+
+ * Fix #1168 - HLS (and DASH): no loading animation while first fragments buffer
+ * Fix #1167 - flash hls: video dimensions not honored when container ratio does not match video ratio
+ * Fix #1174 - Safari 10.1 fullscreen control stops working after minimising with escape
+ * Fix #1166 - playlist: clicking on last item when last clip has finished advances (regression)
+ * Fix #1152 - Android Fullscreen error with fp 7.0.2
+ * Fix #1164 - No subtitles on startscreen
+ * Fix #1117 - addPlaylistItem on last clip inconsistencies
+ * Fix #1154 - Hidden menus stay clickable
+ * Fix #1155 - Subtitle wrapper never removed
+ * Fix #1157 - IE9: html5 sources do not work (regression from fp6)
+
+
+
+Version 7.0.2
+=============
+
+Fixes
+-----
+
+ * Fix #1138 - Safari: javascript "first frame" installs stuck in loading state (regression)
+ * Fix #1135 - iPad Chrome - video does not load
+ * Fix #1125 - SVG filters not working when base href set
+ * Dot not indicate speed rate change when playback starts (#1136)
+
+Version 7.0.1
+=============
+
+Enhancements
+------------
+
+ * DVR - back to live by clicking LIVE in timeline (#1105)
+ * New SVG loading animations to match skin modifiers
+
+Fixes
+-----
+
+ * Fix #1102 - DVR window handling in flash engine
+ * Fix #1119 - flash hls quality selection in playlist: scrubber may be frozen
+ * Fix #1125 - SVG filters not working when base href set
+ * Fix #1123 - No video on iOS Chrome
+ * Fix #1098 - desktop Safari live: advances in paused state (regression)
+ * Fix #1121 - fp-edgy fp-outlined combo loses pause action indicator
+ * Fix #1099 - Chrome: embed code sometimes not copied to clipboard
+ * Fix #1104 - DVR seeking not possible with iOS
+ * Fix #1100 - FP7: no controls with native_fullscreen on Android
+ * Fix #1115 - FP7: minimal skin controlbar not aligned correctly in IE11
+ * Fix #1110 - iPad: fp-full timeline
+ * Fix #1107 - Android live/dvr: shows "dvr" duration instead of "Live" (hlsjs) or "Infinity" (native)
+ * Fix #1113 - FP7: no speed indicator
+ * Fix #1108 - embed: do not duplicate iframe dimension units if given 
+ * Fix #1128 - Remove duplicate border-radius css rule 
+ * Fix #1129 - bar-slider: bean.fire third argument must be array
 
 Version 7.0
 ===========

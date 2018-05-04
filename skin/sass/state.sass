@@ -19,10 +19,14 @@
     &.is-loading
       .fp-ui > .fp-play
         display: none
+      .fp-ui > .fp-waiting
+        display: block
   &.is-poster
     .fp-engine
       left: -9999em
       top: -9999em
+    .fp-captions
+      display: none !important
   &.is-disabled
     .fp-color
       background-color: #999
@@ -56,10 +60,14 @@
   &.is-fullscreen.fp-edgy.fp-outlined
     .fp-fullscreen:before
       content: "\e316"
+  &.is-fullscreen.is-mouseout.is-playing
+    .fp-ui
+      cursor: none
   &.is-loading, &.is-seeking
     .fp-waiting
-      display: block
-      opacity: 1
+      display: block !important
+      svg, p
+        opacity: 1
     .fp-play
       display: none !important
   &.is-playing
@@ -104,11 +112,14 @@
   &.is-live
     .fp-timeline
       visibility: hidden
+    .fp-bar > *.fp-buffer
+      max-width: 100%
     &.is-dvr
       .fp-timeline
         visibility: visible
-    .fp-timestamp
-      display: none !important
+      &.is-live-position
+        .fp-duration
+          color: #00abcd
   &.is-flash-disabled
     .fp-waiting
       display: none !important
@@ -120,3 +131,7 @@
         display: none
     .fp-engine
       top: 0
+  &.is-tiny
+    font-size: .7em
+  &.is-small
+    font-size: .8em
